@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h1>All Pages</h1>
+
+<hr style="width:85%;text-align:left;margin-left:0"> 
+
+    <ul>
+        {% for entry in entries %}
+        <!-- displaying a link for the article, inputting the 2 arguments of views.entry() -->
+        <li><a href="{% url 'article' entry%}"> {{ entry }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

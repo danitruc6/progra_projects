@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel='stylesheet' href="style.css">
+  <title>Google Advanced Search</title>
+</head>
+
+<body>
+  <div class="adv_header">
+    <div class="adv_logo">
+      <a href="index.html">
+        <img src="google.png" class="adv_logo_index" alt="Google logo" />
+      </a>
+    </div>
+    <div class="links">
+      <a class="img_item" href="index.html"> Google Search </a>
+    </div>
+  </div>
+  <div class="appbar">
+    <label class="title" style="margin-left: 10px;">Advanced Search</label>
+  </div>
+  <div class="adv_line"></div>
+  <div class="adv_container">
+    <form action="https://google.com/search">
+      <span>Find pages with..</span>
+      <div class="adv_fields">
+        <div class="adv_fields_left">
+          <label>all these words:</label>
+        </div>
+        <div class="adv_fields_right">
+          <input type="text" class="adv_input" name="as_q">
+        </div>
+      </div>
+
+      <div class="adv_fields">
+        <div class="adv_fields_left">
+          <label>this exact word or phrase:</label>
+        </div>
+        <div class="adv_fields_right">
+          <input type="text" class="adv_input" name="as_epq">
+        </div>
+      </div>
+
+      <div class="adv_fields">
+        <div class="adv_fields_left">
+          <label>any of these words:</label>
+        </div>
+        <div class="adv_fields_right">
+          <input type="text" class="adv_input" name="as_oq">
+        </div>
+      </div>
+
+      <div class="adv_fields">
+        <div class="adv_fields_left">
+          <label>none of these words:</label>
+        </div>
+        <div class="adv_fields_right">
+          <input type="text" class="adv_input" name="as_eq">
+        </div>
+      </div>
+
+      <div class="adv_button_div">
+        <input type="submit" value="Advanced Search" class="adv_button">
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

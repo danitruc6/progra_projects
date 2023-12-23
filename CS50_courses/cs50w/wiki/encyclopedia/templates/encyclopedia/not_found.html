@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block body %}
+<h1 style="color:red;">Error</h1>
+
+<hr style="width:85%;text-align:left;margin-left:0"> 
+
+This Wiki does not have an article with this exact name. Please search for <span style="font-weight:bold">{{ title }}</span> in the Wiki to check for
+alternative titles or spellings.
+{% endblock %}

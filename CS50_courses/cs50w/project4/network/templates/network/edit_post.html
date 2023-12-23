@@ -1,0 +1,13 @@
+<!-- edit_post.html -->
+
+{% extends "network/layout.html" %}
+
+{% block content %}
+<form id="edit-post-form" method="POST" data-post-id="{{ post.id }}">
+    {% csrf_token %}
+    <textarea id="edit-post-content" name="content" rows="3">{{ post.content }}</textarea>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+  
+
+{% endblock %}

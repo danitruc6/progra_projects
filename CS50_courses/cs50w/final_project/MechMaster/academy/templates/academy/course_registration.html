@@ -1,0 +1,29 @@
+{% extends "academy/layout.html" %}
+{% load static %}
+
+{% block title %}MechMaster - Course Registration{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="main-body">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'course_list' %}">Courses</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Course Registration</li>
+        </ol>
+      </nav>
+      <!-- /Breadcrumb -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h1>Course Registration</h1>
+            <p>You have successfully registered for the course "{{ course.title }}".</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

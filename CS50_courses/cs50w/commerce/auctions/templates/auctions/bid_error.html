@@ -1,0 +1,13 @@
+
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<h1>Error</h1>
+<p>Your bid must be higher than the starting price or the current highest bid.</p>
+<p><a href="{% url 'item' listing_id=listing.id %}">Back to listing</a></p>
+
+
+
+
+{% endblock %}

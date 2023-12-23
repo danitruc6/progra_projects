@@ -1,0 +1,41 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <div class="row">
+        {% for listing in listings %}
+            {% if not listing.closed %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ listing.url_image }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{% url 'item' listing.id %}">{{ listing.title }}</a></h5>
+                            <p class="card-text">{{ listing.description }}</p>
+                            <p class="card-text"><strong>Price: ${{ listing.highest_bid|default:listing.starting_bid }}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <p>No active listings.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Closed Listings</h2>
+    <div class="row">
+        {% for listing in closed_listings %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                <div class="card">
+                    <img class="card-img-top" src="{{ listing.url_image }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'item' listing.id %}">{{ listing.title }}</a></h5>
+                        <p class="card-text">{{ listing.description }}</p>
+                        <p class="card-text"><strong>Price: ${{ listing.highest_bid|default:listing.starting_bid }}</strong></p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No closed listings yet.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

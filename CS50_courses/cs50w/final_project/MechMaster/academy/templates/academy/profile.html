@@ -1,0 +1,141 @@
+{% extends "academy/layout.html" %} 
+
+{% load static %} 
+{% block title%}MechMaster - Profile{% endblock %} 
+
+
+{% block content %}
+<div class="container">
+  <div class="main-body">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item">
+          <a href="">{{ profile.user.username }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+      </ol>
+    </nav>
+    <!-- /Breadcrumb -->
+
+    <div class="container mb-4">
+      <h1>User Profile</h1>
+      <div class="d-flex flex-row">
+        <div class="profile-info me-4"> 
+          {% if profile.profile_pic_upload %}
+            <img class="profile-pic" src="{{ profile.profile_pic_upload.url }}" alt="Profile Picture"/> 
+          {% else %}
+            <img class="profile-pic" src="{% static 'academy/images/no_image.webp' %}" alt="Profile Picture"/> 
+          {% endif %}
+        </div>
+        <div class="d-flex flex-column">
+          <div > <h2>{{ profile.user.username }}</h2> </div>
+          <div class="row"> <p>{{ profile.bio }}</p> </div>
+          <div class="row"> <div class="col-md-12"> <button id="editProfileButton" class="btn button">Edit Profile <i class="far fa-edit"></i></button> </div> </div>
+          </div>
+      </div>
+    </div>
+    
+    
+    <p>
+      Welcome to your progress page, {{ profile.user.username }}! Here, you can
+      track your learning journey and see how far you've come on your quest to
+      become a master of custom mechanical keyboards.
+    </p>
+
+    <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="true" >Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="topics-tab" data-toggle="tab" href="#topics" role="tab" aria-controls="topics" aria-selected="false">Topics</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress" role="tab" aria-controls="progress" aria-selected="false" >Forum Participation</a>
+      </li>
+      <!-- Quiz Scores Tab -->
+      <li class="nav-item">
+        <a class="nav-link" id="quiz-scores-tab" data-toggle="tab" href="#quiz-scores" role="tab" aria-controls="quiz-scores" aria-selected="false">Quiz Scores</a>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="profileTabsContent">
+      <!-- Courses Tab -->
+      <div class="tab-pane fade show active" id="courses" role="tabpanel" aria-labelledby="courses-tab" >
+        <h2>Registered Courses</h2>
+        {% if profile.courses.exists %}
+        <ul class="list-group">
+          {% for course in profile.courses.all %}
+          <a href="{% url 'course_page' course.id %}" class="list-group-item list-group-item-action list-custom">{{ course.title }}</a>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No courses found.</p>
+        {% endif %}
+      </div>
+
+      <!-- Topics Tab -->
+      <div class="tab-pane fade" id="topics" role="tabpanel" aria-labelledby="topics-tab">
+        <h2>Created Topics</h2>
+        {% if user_topics.exists %}
+        <ul class="list-group">
+          {% for topic in user_topics %}
+          <a href="{% url 'forum_topic_detail' topic.id %}" class="list-group-item list-group-item-action list-custom" >{{ topic.title }}</a>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No topics found.</p>
+        {% endif %}
+      </div>
+
+      <!-- My Progress Tab -->
+      <div class="tab-pane fade" id="progress" role="tabpanel" aria-labelledby="progress-tab">
+        <p class="mt-2">Check out your forum participation and contributions:</p>
+        <ul>
+          <li>Total Topics Created: {{ num_topics }}</li>
+          <li>Total Posts: {{ num_posts }}</li>
+          <li>Total Replies Received: {{ num_replies }}</li>
+        </ul>
+      </div>
+      <!-- Quiz Scores Tab Content -->
+      <div class="tab-pane fade" id="quiz-scores" role="tabpanel" aria-labelledby="quiz-scores-tab">
+      <h2>Quiz Scores</h2>
+      {% if quiz_attempts.exists %}
+      <ul class="list-group">
+          {% for attempt in quiz_attempts %}
+          <a href="{% url 'quiz_result' quiz_id=attempt.quiz.id %}" class="list-group-item list-group-item-action list-custom" >{{ attempt.quiz.course.title }} Quiz - Score: {{ attempt.score }}/{{ attempt.quiz.questions_qty }}.</a>
+          {% endfor %}
+      </ul>
+      {% else %}
+      <p>No quiz scores available.</p>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Edit Profile Modal Popup -->
+<div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+        <button type="button" class="close btn-close btn-close-white" data-dismiss="modal" aria-label="Close">
+          {% comment %} <span aria-hidden="true">&times;</span> {% endcomment %}
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'profile' user.username %}">
+          {% csrf_token %} {{ profile_form.as_p }}
+          <button type="submit" class="btn button">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'academy/edit_profile.js'%}"></script>
+<script src="{% static 'academy/tab_logic.js' %}"></script>
+{% endblock %}

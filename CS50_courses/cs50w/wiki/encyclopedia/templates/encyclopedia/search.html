@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block body %}
+<h1>Search Results:</h1>
+<hr>
+
+{% if match%}
+The page exactly named "<span style="color: blue; font-weight: bold">{{ query }}</span>" does not exist, but consider checking the search results below to see whether the topic is already covered.
+
+
+<ul>
+  {% for entry in matching_entries %}
+  <!-- displaying a link for the article, inputting the 2 arguments of views.entry() -->
+  <li><a href="{% url 'article' entry%}"> {{ entry }}</a></li>
+  {% endfor %}
+</ul>
+
+{% else %}
+There were no results matching the query "<span style="color: blue; font-weight: bold">{{ query }}</span>".
+
+{% endif %}
+
+{% endblock %}

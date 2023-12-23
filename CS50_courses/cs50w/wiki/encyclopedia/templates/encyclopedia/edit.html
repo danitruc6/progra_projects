@@ -1,0 +1,32 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Edit Page
+{% endblock %}
+
+{% block body %}
+<h1>Edit page</h1>
+
+<hr style="width:85%;text-align:left;margin-left:0"> 
+
+
+<form action="{% url 'edit_page' title%}" name="edit_form" method="post">
+  {% csrf_token %}
+
+  <label for="edit_page">Title:</label>
+  <input type = "text" name="title" value={{ title }}>
+
+  <br>
+
+  <label for="edit_page">Please edit your article content in Markdown format:</label>
+  <br>
+  <textarea name="edit_page" style="height:50vh">
+{{ content }}
+  </textarea>
+
+  <br>
+  <input type="submit" value="Save">
+</form>
+
+{% endblock %}
+

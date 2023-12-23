@@ -1,0 +1,463 @@
+/* Base colors */
+:root {
+    --color-background: #282a36;
+    --color-foreground: #f8f8f2;
+    --color-comment: #6272a4;
+    --color-selection: #44475a;
+    --color-cyan: #8be9fd;
+    --color-green: #50fa7b;
+    --color-orange: #ffb86c;
+    --color-pink: #ff79c6;
+    --color-purple: #bd93f9;
+    --color-red: #ff5555;
+    --color-yellow: #f1fa8c;
+  }
+  
+  footer {
+    margin-bottom:0px !important;
+  }
+
+  /* Text colors */
+  body {
+    color: var(--color-foreground);
+  }
+  
+  /* Background colors */
+  body {
+    background-color: var(--color-background);
+  }
+  
+  /* Link colors */
+  a {
+    color: var(--color-pink);
+  }
+  
+  a:hover {
+    color: var(--color-purple);
+  }
+  
+  /* Button colors */
+  .button {
+    background-color: var(--color-pink);
+    color: var(--color-background);
+  }
+
+  .button-alt {
+    background-color: var(--color-red);
+    color: var(--color-background);
+  }
+  
+  .button:hover {
+    background-color: var(--color-purple);
+  }
+  .button-alt:hover {
+    background-color: var(--color-purple);
+  }
+  
+  /* Form input colors */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    background-color: var(--color-selection);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-comment);
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  textarea:focus {
+    background-color: var(--color-comment);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-pink);
+  }
+  /* Code syntax highlighting colors */
+  .pre {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+  
+  .comment {
+    color: var(--color-comment);
+  }
+  
+  .keyword {
+    color: var(--color-cyan);
+  }
+  
+  .string {
+    color: var(--color-green);
+  }
+  
+  .number {
+    color: var(--color-orange);
+  }
+  
+.course-card {
+  background-color: var(--color-selection);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-comment);
+}
+
+.course-card:hover {
+  background-color: var(--color-comment);
+}
+
+.registered-badge {
+  background-color: var(--color-green);
+  color: var(--color-background);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.card-link {
+  text-decoration: none;
+}
+
+
+.breadcrumb > .active,
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+  color: var(--color-foreground);
+}
+
+.lesson-card {
+  background-color: var(--color-selection);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-comment);
+}
+
+.nav-tabs .nav-link {
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-comment);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--color-background);
+  background-color: var(--color-pink);
+  border-color: var(--color-pink);
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--color-purple);
+  background-color: var(--color-selection);
+  border-color: var(--color-comment);
+}
+
+.nav-tabs .nav-link.active:hover {
+  background-color: var(--color-pink);
+  border-color: var(--color-pink);
+}
+
+
+
+/* New styles for the average rating section */
+.average-rating-container {
+  display: flex;
+  justify-content: center;
+}
+
+.average-rating-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 150px;
+  height: 150px;
+  background-color: var(--color-selection);
+  color: var(--color-foreground);
+  border: 3px solid var(--color-orange);
+  border-radius: 50%;
+}
+
+.average-rating {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.star-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.star-icons i {
+  color: var(--color-yellow);
+}
+
+
+.rating-stars {
+  color: var(--color-yellow);
+}
+
+.total-ratings {
+  font-size: 14px;
+  color: var(--color-cyan);
+}
+
+
+/* Reviews style */
+#reviews-container {
+  margin-top: 20px;
+}
+.review-card {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  border: 2px solid var(--color-comment);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.review-username {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-pink);
+}
+
+.review-timestamp {
+  color: var(--color-comment);
+}
+
+.review-rating {
+  color: var(--color-foreground);
+}
+
+.review-star {
+  color: var(--color-yellow);
+}
+
+.review-comment {
+  margin-top: 10px;
+}
+
+.no-reviews {
+  color: var(--color-comment);
+}
+
+/* Topic cards */
+
+.topic-card {
+  background-color: var(--color-selection);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-comment);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.topic-card:hover {
+  background-color: var(--color-comment);
+}
+
+.reply-card {
+  background-color: var(--color-selection);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-comment);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.reply-timestamp {
+  color: var(--color-purple);
+}
+
+.topic-views {
+  color: var(--color-cyan);
+}
+
+.topic-card-replies {
+  color: var(--color-green);
+}
+.topic-card-views {
+  color: var(--color-cyan);
+}
+.topic-card-likes {
+  color: var(--color-red);
+}
+
+.topic-timestamp {
+  color: var(--color-purple);
+}
+
+/* Liked button style */
+
+.like-btn.liked {
+  color: var(--color-red); /* Change the color to your desired liked state color */
+}
+
+.like-btn.liked .heart-icon {
+  font-weight: bold; /* Add additional styling to differentiate the liked state */
+}
+
+/* Not liked button style */
+.like-btn.not-liked {
+  color: inherit; /* Reset the color to inherit from the parent */
+}
+
+.like-btn.not-liked .heart-icon {
+  font-weight: normal; /* Reset any additional styling applied to the heart icon */
+}
+
+/* Remove link styling for like button */
+.like-btn {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Add cursor pointer to indicate interactivity */
+.like-btn:hover {
+  cursor: pointer;
+  color: var(--color-red);
+}
+
+.reply-form textarea {
+  width: 100%; /* Set the width to 100% to make it flexible */
+  resize: vertical; /* Allow vertical resizing if needed */
+}
+
+
+.forum-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--color-selection);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-comment);
+}
+
+.forum-table th,
+.forum-table td {
+  padding: 12px;
+  border: 1px solid var(--color-comment);
+}
+
+.forum-table th {
+  background-color: var(--color-comment);
+}
+
+/* CSS to make the login alert div smaller in the horizontal axis */
+.login-alert {
+  background-color: var(--color-yellow);
+  color: var(--color-selection);
+  display: inline-block; /* Change the display to inline-block to make the div shrink horizontally */
+  max-width: 260px; /* Set the maximum width you desire */
+  overflow: hidden; /* Hide any content that overflows the defined width */
+  white-space: nowrap; /* Prevent the text from wrapping to a new line */
+  text-overflow: ellipsis; /* Show an ellipsis (...) if the content overflows */
+}
+
+/* List custom colors */
+.list-custom {
+  background-color: var(--color-orange);
+  border: 1px solid var(--color-comment);
+  border-radius: 5px;
+}
+.list-custom:hover {
+  background-color: var(--color-purple);
+}
+
+.modal-content {
+  background-color: var(--color-background);
+  border: 3px solid var(--color-comment);
+  border-radius: 5px;
+}
+
+.modal-header {
+  background-color: var(--color-selection);
+}
+
+
+.profile-pic {
+  /* border: 2px solid var(--color-foreground); */
+  border-radius: 50%;
+  width: 150px; /* Set the desired width */
+  height: 150px; /* Set the desired height */
+  overflow: hidden; /* Hide any overflow */
+}
+
+.profile-pic-bar {
+  border-radius: 50%;
+  width: 20px; /* Set the desired width */
+  height: 20px; /* Set the desired height */
+  overflow: hidden; /* Hide any overflow */
+}
+
+.profile-pic-forum {
+  border-radius: 50%;
+  width: 60px; /* Set the desired width */
+  height: 60px; /* Set the desired height */
+  overflow: hidden; /* Hide any overflow */
+}
+
+.no-profile-pic-forum {
+  align-items:center !important;
+  justify-content:center !important;
+  background-color: var(--color-comment);
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  font-size: 35px;
+}
+
+.quiz_title {
+  color: var(--color-red);
+}
+
+.quiz_question {
+  color: var(--color-cyan);
+}
+
+.nav_title1 {
+  color: var(--color-red);
+}
+
+.nav_title2 {
+  color: var(--color-orange);
+}
+
+.username_text {
+  color: var(--color-cyan);
+}
+
+.logout_text {
+  color: var(--color-red);
+}
+
+.login_text {
+  color: var(--color-green);
+}
+
+.sign_up {
+  color: var(--color-orange);
+}
+
+.text_green {
+  color: var(--color-green);
+}
+
+.text_red {
+  color: var(--color-red);
+}
+
+/* Index content */
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    max-width: 800px; /* Adjust the max-width as needed */
+    padding: 20px;
+}
+
+.topic-bottom{
+  /* background-color: var(--color-selection); */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+/* styling text area from form-control */
+.review-form {
+  background-color: var(--color-cyan) !important;
+  color: var(--color-background);
+}

@@ -1,0 +1,64 @@
+{% extends "academy/layout.html" %}
+{% load static %}
+
+{% block title %}MechMaster - Home{% endblock %}
+
+{% block content %}
+<div class="center-content">
+    <h1 class="mb-4">Welcome to MechMaster</h1>
+    <img class="mb-4" src="{% static 'academy/images/intro.png' %}" alt="img of mech keeb" height="250">
+    <p>Discover the fascinating world of custom mechanical keyboards and enhance your typing and customization skills.</p>
+
+    <h2>Where to start?</h2>
+      <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+              {% if user.is_authenticated%}
+                <a href="#" class="card-link">
+              {% else %}
+                <a href="{% url 'login' %}" class="card-link">
+              {% endif %}
+                <div class="card mb-4 course-card">
+                  <img src="{% static 'academy/images/login.jpeg' %}" class="card-img-top" alt="loging_image" height ="200" width="200">
+                  <div class="">
+                    <h5 class="card-title">Sign in</h5>
+                    <p class="">Register at the academy and create your user profile before you begin.</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            <div class="col-md-4">
+              <a href="{% url 'course_list'%}" class="card-link">
+                <div class="card mb-4 course-card">
+                  <img src="{% static 'academy/images/course.jpeg' %}" class="card-img-top" alt="loging_image" height ="200" width="200">
+                  <div class="card-body">
+                    <h5 class="card-title">Select a course</h5>
+                    <p class="card-text">Choose the course that best suits your needs to start learning.</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-md-4">
+              <a href="#" class="card-link">
+                <div class="card mb-4 course-card">
+                  <img src="{% static 'academy/images/learn.jpeg' %}" class="card-img-top" alt="loging_image" height ="200" width="200">
+                  <div class="card-body">
+                    <h5 class="card-title">Start learning</h5>
+                    <p class="card-text">Enjoy the delivered content and learn from the hands of professionals.</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+
+
+
+
+
+        </div>
+      </div>
+</div>
+{% endblock %}

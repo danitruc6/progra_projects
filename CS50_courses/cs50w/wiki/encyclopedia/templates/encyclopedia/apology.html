@@ -1,0 +1,22 @@
+
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Page already exists
+{% endblock %}
+
+{% block body %}
+<h1 style="color:red;">Error</h1>
+
+<hr style="width:85%;text-align:left;margin-left:0"> 
+
+
+
+<p>
+ This Wiki already has an article with this exact name. Please search for    <span style="color: blue">{{ title }}</span>
+  in the Wiki to check for
+alternative titles.
+ 
+</p>
+
+{% endblock %}

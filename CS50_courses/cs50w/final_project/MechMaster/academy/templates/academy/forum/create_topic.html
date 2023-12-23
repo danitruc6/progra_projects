@@ -1,0 +1,34 @@
+{% extends "academy/layout.html" %}
+{% load static %}
+
+{% block title %}Create Topic - {{ category.name }}{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="main-body">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'forum_category_list' %}">Forum</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'forum_topic_list' category_id=category.id %}">{{ category.name }}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Create Topic</li>
+        </ol>
+      </nav>
+      <!-- /Breadcrumb -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="mb-4">Create New Topic</h3>
+            <form method="POST">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="btn btn-primary">Create Topic</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+/* Liked button style */
+.like-btn.liked {
+    color: red; /* Change the color to your desired liked state color */
+  }
+  
+  .like-btn.liked .heart-icon {
+    font-weight: bold; /* Add additional styling to differentiate the liked state */
+  }
+  
+  /* Not liked button style */
+  .like-btn.not-liked {
+    color: inherit; /* Reset the color to inherit from the parent */
+  }
+  
+  .like-btn.not-liked .heart-icon {
+    font-weight: normal; /* Reset any additional styling applied to the heart icon */
+  }

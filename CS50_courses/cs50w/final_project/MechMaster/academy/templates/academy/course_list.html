@@ -1,0 +1,51 @@
+{% extends "academy/layout.html" %}
+{% load static %}
+
+{% block title %}MechMaster - Courses{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="main-body">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Courses</li>
+        </ol>
+      </nav>
+      <!-- /Breadcrumb -->
+
+      <div class="container">
+        <div class="row">
+          {% for course in courses %}
+            <div class="col-md-4">
+              <a href="{% url 'course_page' course.id %}" class="card-link">
+                <div class="card mb-4 course-card">
+                  <img src="{{ course.course_img }}" class="card-img-top" alt="Course Image" height ="300">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ course.title }}</h5>
+                    <p class="card-duration"><i class="far fa-clock" style="color: #8be9fd"></i> {{ course.duration }}</p>
+                    <!-- Display the ratings start -->
+                    <p >
+                      <span>{{ course.average_rating|default:""|floatformat:1 }}</span>
+                      <span class="course-rating" data-average-rating="{{ course.average_rating|default:'0' }}"></span>
+                    </p>
+                    <hr>
+                    <p class="card-text">{{ course.description }}</p>
+                    {% if course in profile.courses.all %}
+                      <span class="registered-badge">Registered</span>
+                    {% else %}
+                      <button onclick="registerCourse(event, {{ course.id }}, this)" class="btn button">Register</button>
+                    {% endif %}
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'academy/academy.js' %}"></script>
+{% endblock %}

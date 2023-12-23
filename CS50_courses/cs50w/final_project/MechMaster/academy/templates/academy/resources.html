@@ -1,0 +1,79 @@
+{% extends "academy/layout.html" %}
+
+{% block title %}MechMaster - Resources{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="main-body">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Resources</li>
+      </ol>
+    </nav>
+    <!-- /Breadcrumb -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Resources</h1>
+          <p>
+            Welcome to the resources page of MechMaster - your go-to place for custom mechanical keyboard enthusiasts! Here, you can find useful materials, links, and information to enhance your knowledge and passion for mechanical keyboards.
+          </p>
+
+          <h2>Build Guides</h2>
+          <ul>
+            <li><a href="https://www.xda-developers.com/how-to-build-mechanical-keyboard/">How to build your own mechanical keyboard</a></li>
+            <li><a href="https://www.maketecheasier.com/ultimate-keycap-guide/">Ultimate Keycap Guide: How to Spice Up Your Mechanical Keyboard</a></li>
+            <li><a href="https://switchandclick.com/how-to-build-a-keyboard/">How to Build a Custom Mechanical Keyboard</a></li>
+          </ul>
+
+          <h2>Community Forums</h2>
+          <ul>
+            <li><a href="{% url 'forum_category_list' %}">MechMaster Builders Forum - Share Your Builds</a></li>
+            <li><a href="https://www.reddit.com/r/MechanicalKeyboards/">r/MechanicalKeyboards</a></li>
+            <li><a href="https://www.reddit.com/r/olkb/">r/olkb</a></li>
+          </ul>
+
+          <h2>Video Tutorials</h2>
+          <p>
+            Learn through video tutorials from experienced mechanical keyboard builders:
+          </p>
+          <ul>
+            <li><a href="https://youtu.be/d4ujz-noZKk">How To Solder Your Custom Keyboard! Takes only 15 minutes! - Brandon Taylor</a></li>
+            <li><a href="https://youtu.be/vxHb6CJc9V8">How To Lube and Properly Tune Stabilizers - 2022 - alexotos</a></li>
+            <li><a href="https://youtu.be/-vhpHjlkRgQ">Holee Mod Tutorial - The ULTIMATE Stabilizer Mod! - Hamaji Neo </a></li>
+            <li><a href="https://youtu.be/XnQMXVchnrU">PE Foam Mod Explained: An Ingenious Design - nerLucid</a></li>
+          </ul>
+
+          <h2>Online stores</h2>
+          <p>
+            Enhance your customization with the best online stores:
+          </p>
+          <ul>
+            <li><a href="https://boardsource.xyz/">Boardsource</a></li>
+            <li><a href="https://kbdfans.com/">KBD Fans</a></li>
+            <li><a href="https://keyhive.xyz/">Keyhive</a></li>
+            <li><a href="https://www.littlekeyboards.com/">Little Keyboards</a></li>
+            <li><a href="https://splitkb.com/">SpliKB</a></li>
+            <li><a href="https://novelkeys.com/">Novel Keys</a></li>
+            <li><a href="https://novelkeys.com/">Novel Keys</a></li>
+            <li><a href="https://omnitype.com/">Omnitype</a></li>
+          </ul>
+
+          <h2>PCB and 3D printing services</h2>
+          <p>
+            Best online PCB and 3D printing manufacturers:
+          </p>
+          <ul>
+            <li><a href="https://www.pcbway.com/">PCBWAY</a></li>
+            <li><a href="https://www.elecrow.com/">Elecrow</a></li>
+            <li><a href="https://jlcpcb.com/">JLCPCB</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

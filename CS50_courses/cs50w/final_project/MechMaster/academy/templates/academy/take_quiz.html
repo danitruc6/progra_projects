@@ -1,0 +1,40 @@
+{% extends "academy/layout.html" %}
+{% load static %}
+
+
+{% block title %} Quiz: {{ quiz.course.title}} {% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="main-body">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'course_list' %}">Courses</a></li>
+          <li class="breadcrumb-item"><a href="{% url 'course_page' quiz.course.id %}">{{ quiz.course.title}}</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Quiz</li>
+        </ol>
+      </nav>
+      <!-- /Breadcrumb -->
+      <h1 class="quiz_title">{{ quiz.course.title }} Quiz</h1>
+
+      <form id="quiz-form" method="post" action="{% url 'take_quiz' quiz.id %}">
+        {% csrf_token %}
+        {% for question in questions %}
+        <hr>
+        <h2 class="quiz_question">{{ question.text }}</h2>
+        {% for option in question.option_set.all %}
+        <input type="radio" name="question_{{ question.id }}" value="{{ option.id }}" required> {{ option.text }}<br>
+        {% endfor %}
+        <p id="error-{{ question.id }}" class="error-msg" style="color: red; display: none;">Please select an option</p>
+        {% endfor %}
+        <hr>
+        <input class ="btn button" type="submit" value="Submit">
+      </form>
+
+      <script src="{% static 'academy/take_quiz.js' %}"></script>
+
+  </div>
+</div>
+{% endblock %}

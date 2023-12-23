@@ -1,0 +1,29 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+New Page
+{% endblock %}
+
+{% block body %}
+<h1>New page</h1>
+
+<hr>
+
+
+<form action="{% url 'entry_created' %}" name="confirmationForm" method="post">
+  {% csrf_token %}
+
+  <label for="new_page">Title:</label>
+  <input type = "text" name="title" placeholder="Enter title of the article">
+  <br>
+  <label for="new_page">Please enter your article content in Markdown format:</label>
+  <br>
+  <textarea name="new_page" style="height:50vh" placeholder="# Title 
+  
+This is an example of the content, please start with the title always."></textarea>
+
+  <br>
+  <input type="submit" value="Create">
+</form>
+
+{% endblock %}

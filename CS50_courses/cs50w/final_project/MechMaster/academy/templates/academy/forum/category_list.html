@@ -1,0 +1,53 @@
+{% extends "academy/layout.html" %}
+{% load static %}
+
+{% block title %}Forum Categories{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="main-body">
+      <!-- Breadcrumb -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Forum Categories</li>
+        </ol>
+      </nav>
+      <!-- /Breadcrumb -->
+
+      <h2>Forum Categories</h2>
+      <table class="forum-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Topics</th>
+            <th>Latest</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for category in categories %}
+          <tr>
+            <td>
+              <h5><a href="{% url 'forum_topic_list' category.id %}">{{ category.name }}</a></h5>
+              <div class="d-flex">
+                <a href="{% url 'forum_topic_list' category.id %}">
+                  <img src="{{ category.category_image }}" alt="{{ category.name }}" style="max-width: 200px; max-height: 200px;">
+                </a>
+                <p class="p-3">{{ category.description }}</p>
+              </div>
+            </td>
+            <td>{{ category.topics.count }}</td>
+            <td>
+              {% for topic in category.latest_topics %}
+              <p><a href="{% url 'forum_topic_detail' topic_id=topic.id %}">{{ topic.title }}</a></p>
+              {% endfor %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+
+

@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  <h2>My Watchlist</h2>
+  {% if watchlist %}
+    <ul>
+      {% for item in watchlist %}
+        <li><a href="{% url 'item' item.listing.id %}">{{ item.listing.title }}</a></li>
+        <form method="post" action="{% url 'remove_from_watchlist' item.listing.id %}">
+          {% csrf_token %}
+          <button type="submit" class="badge badge-danger">Remove from Watchlist</button>
+        </form>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Your watchlist is empty.</p>
+  {% endif %}
+{% endblock %}

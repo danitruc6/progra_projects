@@ -1,0 +1,13 @@
+{% extends "academy/layout.html" %}
+{% block content %}
+
+<h1>Quiz Result</h1>
+<h2>{{ quiz.title }}</h2>
+{% if percentage_score > 70%}
+    <p class="text_green">Your score is: {{ percentage_score|floatformat:1 }}%</p>
+{% else %}
+    <p class="text_red">Your score is: {{ percentage_score|floatformat:1 }}%</p>
+{% endif %}
+<a href="{% url 'course_page' quiz.course.id %}" class="btn button">Back to Course</a>
+
+{% endblock %}

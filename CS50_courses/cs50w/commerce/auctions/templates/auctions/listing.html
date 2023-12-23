@@ -1,0 +1,118 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<h1>{{content.title}}</h1>
+<br>
+
+{% if user.is_authenticated %}
+{% if watchlist_item %}
+  {% comment %} <p><strong>This item is already in your watchlist.</strong></p> {% endcomment %}
+  <span class="badge badge-success">Watchlisted</span>
+
+
+  <form action="{% url 'remove_from_watchlist' content.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="badge badge-seconday">Remove from Watchlist</button>
+  </form>
+{% else %}
+  <form method="post" action="{% url 'add_to_watchlist' content.id %}">
+    {% csrf_token %}
+    <button type="submit" class="badge badge-primary">Add to Watchlist</button>
+  </form>
+  {% endif %}
+{% endif %}
+
+{% if user == content.user and not content.closed %}
+<form method="post" action="{% url 'close_auction' content.id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">End Auction</button>
+</form>
+{% endif %}
+
+
+
+<img src="{{ content.url_image }}" height="200px" alt="lenovo X20 img">
+<br>
+Description: {{ content.description}}
+<br>
+
+{% if not content.closed %}
+  {% if content.bid_set.all %}
+    <h3> ${{ content.bid_set.last.amount }}</h3>
+    {% else %}
+    <h3>${{ content.starting_bid}}</h3>
+  {% endif %}
+
+
+  {% if content.qty_bids == 0%}
+    <h6 style="font-size: 14px" class="pt-3 text-secondary"> There are no bids yet </h6>
+  {% elif content.bid_set.last.user == user %}
+    <h6 style="font-size: 14px" class="pt-3 text-secondary"> {{ content.qty_bids }} bid(s) so far. You are currently the highest bidder! </h6>
+  {% else %}
+    <h6 style="font-size: 14px" class="pt-3 text-secondary"> {{ content.qty_bids }} bid(s) so far. </h6>
+  {% endif%}
+  <form name="place_bid" action = {% url 'place_bid' content.id %} method="post" >
+    {% csrf_token %}
+
+    {% if content.bid_set.all %}
+      <input type="number" name="new_bid" placeholder="Bid" min="{{ content.bid_set.last.amount }}">
+    {% else %}
+      <input type="number" name="new_bid" placeholder="Bid" min="{{ content.starting_bid }}">
+    {% endif %}
+    
+    <input class="btn btn-primary" type="submit" name="place_bid" value="Place Bid">
+  </form>
+{% else %}
+  <div class="alert alert-warning" style="width: 16%;" role="alert">
+    Auction is closed!
+  </div>
+  {% if content.winner == user.username%}
+  <div class="alert alert-success" style="width: 15%;" role="alert">
+    You are the winner
+  </div>
+  {% endif %}
+{% endif %}
+
+
+<h2>Listing details</h2>
+<ul>
+  <li>Listed by: {{ content.user}} </li>
+  {% if content.category == ""%}
+    <li>Category: Empty</li>
+  {%else%}
+    <li>Category: {{ content.category}} </li>
+  {% endif %}
+</ul>
+
+<br>
+
+<hr>
+<h2>Comments</h2>
+{% if user.is_authenticated %}
+  <form method="post" action="{% url 'add_comment' listing_id=content.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+      <textarea class="form-control" name="comment" rows="3" placeholder="Add a comment..."></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Post Comment</button>
+  </form>
+  <br>
+{% endif %}
+
+{% if content.comment_set.all %}
+  {% for comment in content.comment_set.all %}
+    <div class="card mb-2">
+      <div class="card-header">
+        {{ comment.user }} said on {{ comment.timestamp|date:"F j, Y, g:i a" }}
+      </div>
+      <div class="card-body">
+        {{ comment.comment }}
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>There are no comments yet.</p>
+{% endif %}
+
+{% endblock %}
+
