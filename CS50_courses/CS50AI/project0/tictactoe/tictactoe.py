@@ -49,20 +49,13 @@ def actions(board):
     Returns set of all possible actions (i, j) available on the board.
     """
 
-    possible_actions = []
+    possible_actions = set()
     for i, row in enumerate(board):
         for j, cell in enumerate(row):
             if cell == EMPTY:
-                possible_actions.append((i, j))
+                possible_actions.add((i, j))
 
     return possible_actions
-
-
-# Defining a custom exception for an invalid action on the board
-
-
-class InvalidAction(Exception):
-    pass
 
 
 def result(board, action):
@@ -74,8 +67,8 @@ def result(board, action):
     updated_board = copy.deepcopy(board)
 
     # Checking if the passed action is valid or applied on a non-empty cell
-    if board[action[0]][action[1]] is not EMPTY:
-        raise InvalidAction("This is not a valid action")
+    if action not in actions(board):
+        raise Exception("This is not a valid action")
 
     # Determining which player moves
     move = player(updated_board)
