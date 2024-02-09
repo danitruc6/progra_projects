@@ -226,10 +226,12 @@ class CrosswordCreator:
             if len(word) != variable.length:
                 return False
             # second, checking if there are conflicts with neighbors
-            for neighbor in self.crossword(variable):
+            for neighbor in self.crossword.neighbors(variable):
                 if neighbor in assignment:
-                    i, j = self.crossword.overlaps[variable, neighbor]
-                    if word[i] != assignment[neighbor][j]:
+                    var_index, neighbor_index = self.crossword.overlaps[
+                        variable, neighbor
+                    ]
+                    if word[var_index] != assignment[neighbor][neighbor_index]:
                         return False
             # third, check if the word are distinct
             if word in assignment_words:
@@ -245,7 +247,33 @@ class CrosswordCreator:
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
-        raise NotImplementedError
+        # Dict storing ruled values for each value in the domain of var
+        ruled_out_values = dict()
+
+        for value in self.domains[var]:
+            # keeping track of the ruled out neighboring values
+            ruled_out_count = 0
+            for neighbor in self.crossword.neighbors(var):
+                # we want to only count neighbors that are not assigned yet
+                if neighbor not in assignment:
+                    # getting the overlap indexes
+                    var_index, neighbor_index = self.crossword.overlaps[var, neighbor]
+
+                    # iterating over neighbor's domain values
+                    for neighbor_value in self.domains[neighbor]:
+                        # check  if there's a conflict, if not increase count
+                        if value[var_index] != neighbor_value[neighbor_index]:
+                            ruled_out_count += 1
+            # Store count of current value
+            ruled_out_values[value] = ruled_out_count
+
+        # sort vaules based on the count, in ascending order
+        # using lambda function to sort dict based on values and not keys
+        sorted_values = sorted(
+            self.domains[var], key=lambda value: ruled_out_values[value]
+        )
+
+        return sorted_values
 
     def select_unassigned_variable(self, assignment):
         """
@@ -255,7 +283,23 @@ class CrosswordCreator:
         degree. If there is a tie, any of the tied variables are acceptable
         return values.
         """
-        raise NotImplementedError
+        # Identifying unassigned variables, by checking which are not part of the assignment
+        unassigned_variables = [
+            variable
+            for variable in self.crossword.variables
+            if variable not in assignment
+        ]
+
+        # Sort unassigned variables based on minimum remaining value heuristic
+        unassigned_variables.sort(
+            key=lambda var: (
+                len(self.domains[var]),
+                -len(self.crossword.neighbors(var)),
+            )
+        )
+
+        # Return the first variable from the sorted list
+        return unassigned_variables[0] if unassigned_variables else None
 
     def backtrack(self, assignment):
         """
@@ -266,7 +310,34 @@ class CrosswordCreator:
 
         If no assignment is possible, return None.
         """
-        raise NotImplementedError
+        # check if assignment is complete
+        if self.assignment_complete(assignment):
+            return assignment
+
+        # Select unassigned variable
+        var = self.select_unassigned_variable(assignment)
+
+        # need to order domain
+        ordered_domain = self.order_domain_values(var, assignment)
+
+        # try each value in the domain of the variable
+        for value in ordered_domain:
+            # check if value is consistent
+            if self.consistent(assignment.copy()):
+                # assigning the value to the variable
+                assignment[var] = value
+
+                # recursively calling backtrack
+                result = self.backtrack(assignment)
+
+                # return assignment if completed
+                if result is not None:
+                    return result
+
+                # # if not completed, do a backtrack Search
+                # del assignment[var]
+        # return None is no assignment possible
+        return None
 
 
 def main():
